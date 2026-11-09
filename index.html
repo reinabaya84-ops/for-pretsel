@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Pretsel ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --white: #ffffff;
+    --light: #edf1f5;
+    --powder: #dce5ef;
+    --slate: #91a6bd;
+    --blue: #718399;
+    --dark: #465568;
+}
+
+body {
+    background: var(--light);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+}
+
+.page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: fadeIn .7s ease;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+}
+
+.serif {
+    font-family: 'Playfair Display', serif;
+}
+
+.handwritten {
+    font-family: 'Caveat', cursive;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border: none;
+    background: var(--dark);
+    color: white;
+    padding: 14px 25px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+button:hover {
+    background: var(--blue);
+    transform: translateY(-3px);
+}
+
+/* COVER */
+
+#cover {
+    background: var(--blue);
+    color: white;
+    text-align: center;
+    gap: 25px;
+}
+
+#cover .eyebrow {
+    color: #e1e8ef;
+}
+
+#cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 6vw, 45px);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.envelope {
+    width: 270px;
+    height: 175px;
+    background: #f8fafc;
+    position: relative;
+    margin: 15px;
+    box-shadow: 0 15px 35px #34445740;
+    cursor: pointer;
+}
+
+.letter-inside {
+    position: absolute;
+    inset: 10px;
+    display: grid;
+    place-items: center;
+    color: var(--dark);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #dce5ef;
+    clip-path: polygon(0 0, 50% 58%, 100% 0);
+    z-index: 3;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-left: 135px solid transparent;
+    border-right: 135px solid transparent;
+    border-bottom: 100px solid #e5ebf2;
+    z-index: 2;
+}
+
+.seal {
+    position: absolute;
+    z-index: 4;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: white;
+    display: grid;
+    place-items: center;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+
+/* INTRODUCTION */
+
+.paper {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    padding: 55px 45px;
+    box-shadow: 0 10px 35px #46556812;
+    line-height: 2;
+}
+
+.intro-paper {
+    text-align: center;
+}
+
+.paper h1 {
+    font-size: clamp(30px, 6vw, 42px);
+    font-weight: 400;
+    margin: 20px 0;
+}
+
+.paper p:not(.eyebrow):not(.signature) {
+    font-size: 14px;
+    color: #69798c;
+    white-space: pre-line;
+    margin-bottom: 25px;
+}
+
+.signature {
+    font-size: 27px;
+    color: var(--blue);
+    margin: 20px 0;
+}
+
+/* SCRAPBOOK */
+
+#scrapbook {
+    display: none;
+    background: #e9eef3;
+    padding: 65px 20px;
+}
+
+#scrapbook.active {
+    display: block;
+}
+
+.scrapbook-header {
+    text-align: center;
+    margin: 20px auto 55px;
+}
+
+.scrapbook-header h1 {
+    font-size: clamp(36px, 7vw, 55px);
+    font-weight: 400;
+    margin: 15px 0;
+}
+
+.scrapbook-header p {
+    font-size: 13px;
+    color: #8291a2;
+}
+
+/* POLAROID GRID */
+
+.scrapbook {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 65px 35px;
+    align-items: center;
+    padding: 25px;
+}
+
+.polaroid {
+    position: relative;
+    background: white;
+    padding: 12px 12px 48px;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    box-shadow: 0 8px 25px #46556820;
+    transition: .3s;
+}
+
+.polaroid:nth-child(odd) {
+    transform: rotate(-3deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(3deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) translateY(-7px);
+    box-shadow: 0 15px 30px #46556830;
+}
+
+.polaroid img {
+    width: 100%;
+    aspect-ratio: 4 / 4.5;
+    object-fit: cover;
+    display: block;
+    background: #dce5ef;
+}
+
+.polaroid p {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    color: #718399;
+}
+
+.tape {
+    position: absolute;
+    width: 75px;
+    height: 22px;
+    background: #aabbd0aa;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    z-index: 2;
+}
+
+.memory-note {
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 27px;
+    color: #718399;
+    padding: 20px;
+}
+
+.scrapbook-footer {
+    text-align: center;
+    margin: 70px auto 20px;
+}
+
+.scrapbook-footer h2 {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 15px;
+}
+
+.scrapbook-footer p {
+    font-size: 13px;
+    color: #8291a2;
+    margin-bottom: 15px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8b99a9;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+    .paper {
+        padding: 40px 25px;
+    }
+
+    .scrapbook {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 45px 15px;
+        padding: 10px;
+    }
+
+    .polaroid {
+        padding: 8px 8px 38px;
+    }
+
+    .polaroid p {
+        font-size: 17px;
+    }
+
+    .memory-note {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 380px) {
+    .scrapbook {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<section id="cover" class="page active">
+
+    <p class="eyebrow">a little something for my baby</p>
+
+    <h1>to my favorite person,<br>pretsel</h1>
+
+    <div class="envelope" onclick="showPage('intro')">
+        <div class="letter-inside">a simple letter for you </div>
+        <div class="seal">♡</div>
+    </div>
+
+    <button onclick="showPage('intro')">
+        open your letter →
+    </button>
+
+    <p class="eyebrow">made for pretsel only · 2026</p>
+
+</section>
+
+
+<section id="intro" class="page">
+
+    <div class="paper intro-paper">
+
+        <p class="eyebrow">A LITTLE NOTE BEFORE YOU CONTINUE</p>
+
+        <h1>happy monthsary,<br>baby</h1>
+
+        <p>
+            another month with you, and i'm glad we get to share
+            these moments together. i appreciate the little things
+            you do, the time we spend together, and everything
+            we've experienced along the way :)
+        </p>
+
+        <p>
+            i included Love Is by The Ridleys because it reminds me
+            of the kind of love i have for you. to me, it speaks
+            about finding love in the simplest things, in someone's
+            presence, in the comfort of having them around, and in
+            the ordinary moments that become meaningful because
+            you get to share them with someone you love
+        </p>
+
+        <div class="song-section">
+
+            <p class="song-title">Love Is</p>
+            <p class="song-artist">The Ridleys</p>
+
+            <audio controls loop>
+                <source src="C:\Users\istroberei\Desktop\4 pretsel\Love Is.mp3" type="audio/mpeg">
+            </audio>
+
+            <p class="song-caption">
+                a song that reminds me of you 
+            </p>
+
+        </div>
+
+        <button onclick="showPage('letter')">
+            there's more inside →
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="letter" class="page">
+
+    <div class="paper">
+
+        <p class="eyebrow">for my frencel</p>
+
+        <h1>my dearest pretsel,</h1>
+
+        <p>
+            happy 8th monthsary, baby !
+
+            i don't think i'll ever have enough words to express
+            how grateful i am that God sent you into my life.
+            thank you for your walang sawang pagmamahal sa akin,
+            even on days when things get exhausting, even on
+            days when i feel like distancing myself from the
+            world and everything around me.
+
+            thank you for staying, especially during the moments
+            when i feel like the world has turned its back on me.
+            God knows just how grateful i am to have you in my life.
+
+            thank you for your constant reassurance, for reminding
+            me that it's okay to rest, that it's okay to get tired,
+            and that i don't always have to have everything figured
+            out.
+
+            thank you so much for your patience and for always
+            choosing to understand me, even when i know i'm not
+            always the easiest person to handle.
+
+            i'm sorry for the times i get masungit, easily irritated,
+            or a little difficult to understand. please know that
+            none of those moments mean i love you any less.
+            i hope you never have to question how much you mean
+            to me.
+
+            i love you with all my heart, pretsel. always grateful
+            for you, and always looking forward to all the little
+            and big things we still get to experience together.
+
+            happy 8th month, my love ♡
+        </p>
+
+        <p class="signature">with all my love, </p>
+
+        <button onclick="showPage('scrapbook')">
+            visit our little archive →
+        </button>
+
+    </div>
+
+</section>
+
+
+<section id="scrapbook" class="page">
+
+    <header class="scrapbook-header">
+
+        <p class="eyebrow">A COLLECTION OF LITTLE MOMENTS</p>
+
+        <h1>our little archive</h1>
+
+    </header>
+
+
+    <div class="scrapbook">
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src= "C:\Users\istroberei\Desktop\4 pretsel\p1.jpg.jpg" alt="Memory 1">
+            <p>bff #boyfriend4ever</p>
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p2.jpg.jpg" alt="Memory 2">
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p3.jpg.jpg" alt="Memory 3">
+        </div>
+
+        <div class="memory-note">
+            "u will always be my favorite human being :)"
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p4.jpg.jpg" alt="Memory 4">
+   
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p5.jpg.jpg" alt="Memory 5">
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p6.jpg.jpg" alt="Memory 6">
+        </div>
+
+        <div class="memory-note">
+            "if given the choice, it'd still be you"
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p7.jpg.jpg" alt="Memory 7">
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p8.jpg.jpg" alt="Memory 8">
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p9.jpg.jpg" alt="Memory 9">
+        </div>
+
+        <div class="polaroid">
+            <div class="tape"></div>
+            <img src="C:\Users\istroberei\Desktop\4 pretsel\p10.jpg.jpg" alt="Memory 10">
+        </div>
+
+    </div>
+
+
+    <footer class="scrapbook-footer">
+
+        <p class="eyebrow">AND MANY MORE TO COME</p>
+
+        <h2>here's to more chapters with you</h2>
+
+        <p>thank you for being part of my life</p>
+
+        <p class="handwritten">happy 8th month, my pretsel ♡</p>
+
+        <footer>
+            made for pretsel only · 2026
+        </footer>
+
+    </footer>
+
+</section>
+
+
+<script>
+
+function showPage(pageId) {
+
+    const pages = document.querySelectorAll('.page');
+
+    pages.forEach(function(page) {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+
+}
+
+</script>
+
+</body>
+</html>
